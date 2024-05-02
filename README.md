@@ -1,4 +1,4 @@
-# Pico Ducky: Raspberry Pi Pico USB HID Keyboard
+# Pico Ducky: Raspberry Pi Pico based RubberDucky
 <img width="502" alt="picoducky" src="https://github.com/MedAziz218/pico-ducky/assets/118969900/eadd0037-6a4c-4794-b8d9-46cc107d04eb">
 
 ## Description
