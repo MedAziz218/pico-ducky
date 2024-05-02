@@ -1,5 +1,5 @@
 # Pico Ducky: Raspberry Pi Pico USB HID Keyboard
-
+![alt text](docs/picoducky.png)
 ## Description
 This code allows the Raspberry Pi Pico to function as a USB HID keyboard, capable of executing predefined payloads (commands) on Windows machines through the "Run Command" window (Win+R).
 
@@ -35,3 +35,5 @@ This project was developed as part of my cybersecurity class project in my secon
 
 This project served as the foundation for a broader cybersecurity project, utilizing the BadUSB functionality to launch a reverse shell attack on any Windows victim machine.
 
+## Disclaimer
+This project was created for educational and learning purposes only. The creators do not condone or support any illegal or unethical use of the information or tools provided. The use of this project to execute unauthorized actions on any system without explicit permission is strictly prohibited. The creators shall not be held responsible for any misuse or consequences resulting from the use of this project.
