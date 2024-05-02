@@ -25,7 +25,7 @@ bool fs_changed = true;
 void toggle_msc_mode() {
 
   if (file.open(".state", O_WRITE)) {
-    Serial.println("[important]- "+msc_state );
+    Serial.println("[important]- " + msc_state);
     String new_state;
     if (msc_state == "on") {
       new_state = "msc_state: off  ";
@@ -34,10 +34,10 @@ void toggle_msc_mode() {
     }
     int res = file.write(new_state.c_str());
     // file.write('c')
-    
-    if (res>=0)
+
+    if (res >= 0)
       Serial.println("[saved]- " + new_state);
-    else Serial.println("[error] could not write "+String(res));
+    else Serial.println("[error] could not write " + String(res));
     Serial.flush();
     delay(50);
     file.close();
@@ -86,10 +86,12 @@ void setup_msc() {
   // MSC is ready for read/write
   usb_msc.setUnitReady(true);
   usb_msc.begin();
+  
 
 
   // Init file system on the flash
 }
+
 
 void msc_loop() {
 
@@ -158,33 +160,59 @@ void readline(FatFile& file, String& buffer) {
   }
 }
 
+void save_language_config() {
+  bool res = file.open("config.txt", O_RDWR);
+  if (res) {
+    
+    String s = "language: " + selected_language+"\n";
+    file.write(s.c_str());
+    file.rewind();
+    String tt;
+    readline(file,tt);
+    Serial.println("[logging]- "+tt);
+
+    file.close();
+    Serial.println("[saved] saved language ->"+selected_language);
+  } else Serial.println("[error] could not open config.txt ");
+}
 void load_config() {
-  file.open("config.txt");
+  if (! file.open("config.txt")){
+    Serial.println("[error] could not open file");
+    return;
+  }
+  Serial.println("[info] loading config -"+String(file.available()));
   while (file.available()) {
     String line = "";
     readline(file, line);
     line.trim();
-    if (line.startsWith("[loaded] language:")) {
+    if (line.startsWith("language:")) {
       String temp_language = line.substring(9);
       temp_language.trim();
       setLanguage(temp_language);
       Serial.println("[loaded] Language: " + temp_language);
+      Serial.flush();
+
     } else if (line.startsWith("payload1:")) {
       String temp_payload1 = line.substring(9);
       temp_payload1.trim();
       payload1 = temp_payload1;
       Serial.println("[loaded] Payload1: " + temp_payload1);
+      Serial.flush();
+
     } else if (line.startsWith("payload2:")) {
       String temp_payload2 = line.substring(9);
       temp_payload2.trim();
       payload2 = temp_payload2;
 
       Serial.println("[loaded] Payload2: " + temp_payload2);
+      Serial.flush();
     } else if (line.startsWith("payload3:")) {
       String temp_payload3 = line.substring(9);
       temp_payload3.trim();
       payload3 = temp_payload3;
       Serial.println("[loaded] Payload3: " + temp_payload3);
+      Serial.flush();
+
     }
   }
   file.close();

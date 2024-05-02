@@ -37,6 +37,7 @@ void setLanguage(String lang_str) {
 }
 void setLanguage(int lang_number) {
   selected_language_n = lang_number;
+  selected_language = supported_languages[lang_number];
   if (selected_language_n == EN) conv_table = &conv_tableEN;
   if (selected_language_n == FR) conv_table = &conv_tableFR;
 }
@@ -117,8 +118,14 @@ void loop() {
         press_count++;
         pressed = true;
         dt = millis();
+        digitalWrite(LED_BUILTIN, HIGH);
+
       } else if (!BOOTSEL && pressed) {
         pressed = false;
+        digitalWrite(LED_BUILTIN, LOW);
+      }
+      if (BOOTSEL && millis() - dt > 550) {
+        digitalWrite(LED_BUILTIN, LOW);
       }
     }
 
@@ -130,14 +137,15 @@ void loop() {
       if (press_count == 1) {
         // one long press
         setLanguage((++selected_language_n) % total_langs);
+        save_language_config();
         Serial.println("long press change language to :" + (selected_language_n ? String("FR") : String("EN")));
         return;
       }
       if (press_count == 2) {
         // two long presses
         Serial.println("Two long presses -> opening config mode");
-        Serial.println("[started] "+msc_state);
-        
+        Serial.println("[started] " + msc_state);
+
         toggle_msc_mode();
         delay(1000);
         rp2040.restart();
@@ -174,7 +182,7 @@ void loop() {
       ;
 
 
-  } else if (msc_state=="off") {
+  } else if (msc_state == "off") {
     // standby
     static unsigned long dt = millis();
     static bool state = 0;

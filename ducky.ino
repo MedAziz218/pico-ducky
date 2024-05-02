@@ -13,25 +13,19 @@ void setup_usb_keyboard() {
 
 
   // Set up output report (on control endpoint) for Capslock indicator
-  Serial.println("b4");
   usb_hid.setReportCallback(NULL, hid_report_callback);
-  Serial.println("b44");
-  
+
   usb_hid.begin();
 
-  Serial.println("b444");
 
   // wait until device mounted
   while (!TinyUSBDevice.mounted()) delay(1);
   // start serial
- Serial.println("after1");
   // turn on built-in led
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
- Serial.println("after2");
   // make sure numlock is on
   assure_numlock_and_not_capslock();
-   Serial.println("after3");
   setLanguage(selected_language_n);
 }
 
@@ -111,4 +105,3 @@ void hid_report_callback(uint8_t report_id, hid_report_type_t report_type, uint8
 
   ledIndicators._updated_ = true;
 }
-

