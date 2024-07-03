@@ -1,5 +1,8 @@
 # Pico Ducky: Raspberry Pi Pico based RubberDucky
-<img width="502" alt="picoducky" src="https://github.com/MedAziz218/pico-ducky/assets/118969900/eadd0037-6a4c-4794-b8d9-46cc107d04eb">
+<div style="display: flex; flex-wrap: wrap;">
+    <img src="https://github.com/MedAziz218/pico-ducky/assets/118969900/eadd0037-6a4c-4794-b8d9-46cc107d04eb" alt="picoducky" width="30%" />
+    <img src="https://github.com/MedAziz218/pico-ducky/assets/118969900/6e7ede7c-d1a4-4986-bdf4-2d9121e4b3bc" alt="Animated GIF" style="width: min(62%, 400px);" />
+</div>
 
 ## Description
 This code allows the Raspberry Pi Pico to function as a USB HID keyboard, capable of executing predefined payloads (commands) on Windows machines through the "Run Command" window (Win+R).
